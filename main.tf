@@ -20,6 +20,14 @@ provider "aws" {
   }
 }
 
+data "aws_secretsmanager_secret" "rds_admin_password" {
+  arn = aws_rds_cluster.postgresql.master_user_secret[0].secret_arn
+}
+
+data "aws_secretsmanager_secret_version" "rds_admin_password_latest_version" {
+  secret_id = data.aws_secretsmanager_secret.rds_admin_password.id
+}
+
 data "aws_iam_policy_document" "codebuild_assume_role" {
   statement {
     effect = "Allow"
@@ -186,14 +194,14 @@ resource "aws_codebuild_project" "liquibase-project" {
 
     environment_variable {
       name  = "URL"
-      type  = "Plaintext"
+      type  = "PLAINTEXT"
       value = "jdbc:postgresql://${aws_rds_cluster.postgresql.endpoint}"
     }
 
     environment_variable {
       name  = "PASSWORD"
       type  = "SECRETS_MANAGER"
-      value = aws_rds_cluster.postgresql.master_password
+      value = data.aws_secretsmanager_secret_version.rds_admin_password_latest_version.secret_id
     }
   }
 
