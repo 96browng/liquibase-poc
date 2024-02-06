@@ -1,0 +1,15 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo $AWS_DEFAULT_REGION
+      - echo $URL
+  build: 
+    steps:
+      - uses: liquibase-github-actions/update@v4.21.1
+        with:
+          changelogFile: db/changelog/changelog-root.xml
+          url: ${{ env.URL }}
+          username: postgres
+          password: ${{ $env.PASSWORD }}
+          headless: true

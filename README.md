@@ -15,3 +15,16 @@ Colima uses docker profiles which some applications, such as the Terraform docke
 ```
 export DOCKER_HOST="unix://${HOME}/.colima/docker.sock"
 ```
+
+## Liquibase
+
+```
+liquibase status --username=postgres --password=password --url=jdbc:postgresql://localhost:5432/postgres  --changelog-file=./db/changelog/changelog-root.sql
+```
+
+
+* Deploy to RDS
+* Secrets Manager - password of DB
+* Param Store - db location
+* GitHub action pipeline
+* CodeBuild - run liquibase
