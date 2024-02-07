@@ -10,9 +10,9 @@ phases:
     steps:
       - uses: liquibase-github-actions/update@v4.21.1
         with: 
-          changelogFile: changelog-root.sql
-          url: ${{ env.URL }}
-          username: postgres
+          changelogFile: "changelog-root.sql"
+          url: "${{ env.URL }}"
+          username: "postgres"
           password: ${{ $env.PASSWORD }}
           headless: true
           logLevel: DEBUG
