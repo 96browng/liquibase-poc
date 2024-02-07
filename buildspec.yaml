@@ -13,4 +13,4 @@ phases:
           username: postgres
           password: ${{ $env.PASSWORD }}
           headless: true
-          logLevel: INFO
+          logLevel: DEBUG
