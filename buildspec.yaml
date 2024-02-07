@@ -6,9 +6,9 @@ phases:
       - echo $URL
   build: 
     steps:
-      - uses: liquibase-github-actions/update@v4.21.1
+      - uses: liquibase-github-actions/update@v4.25.1
         with:
-          changelogFile: db/changelog/changelog-root.xml
+          changelogFile: db/changelog/changelog-root.sql
           url: ${{ env.URL }}
           username: postgres
           password: ${{ $env.PASSWORD }}
