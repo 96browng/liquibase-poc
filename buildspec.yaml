@@ -4,6 +4,7 @@ phases:
     commands:
       - echo $AWS_DEFAULT_REGION
       - echo $URL
+      - ping -c 5 www.bbc.co.uk 
   build:
     steps:
       - uses: liquibase-github-actions/update@v4.21.1
