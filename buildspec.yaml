@@ -13,6 +13,6 @@ phases:
           changelogFile: "changelog-root.sql"
           url: "${{ env.URL }}"
           username: "postgres"
-          password: ${{ $env.PASSWORD }}
+          password: "${{ env.PASSWORD }}"
           headless: true
           logLevel: DEBUG
