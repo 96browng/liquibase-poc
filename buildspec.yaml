@@ -4,8 +4,6 @@ phases:
     commands:
       - echo $AWS_DEFAULT_REGION
       - echo $URL
-      - sudo yum -y install iputils
-      - ping -c 5 www.bbc.co.uk 
   build:
     steps:
       - name: set password var
