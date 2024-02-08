@@ -8,11 +8,15 @@ phases:
       - ping -c 5 www.bbc.co.uk 
   build:
     steps:
-      - uses: liquibase-github-actions/update@v4.21.1
+      - name: set password var
+        id: vars
+        run: echo "DB_PASSWORD=$(echo ${{ env.PASSWORD }} | jq '.password')" >> $GITHUB_OUTPUT
+      - name: liquibase schema update
+        uses: liquibase-github-actions/update@v4.21.1
         with: 
           changelogFile: "changelog-root.sql"
           url: "${{ env.URL }}"
           username: "postgres"
-          password: "${{ env.PASSWORD }}"
+          password: ${{ steps.vars.outputs.DB_PASSWORD }}
           headless: true
           logLevel: DEBUG
